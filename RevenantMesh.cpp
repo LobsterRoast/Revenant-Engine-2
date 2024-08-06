@@ -4,6 +4,16 @@
 #include <iostream>
 #include <fstream>
 
+std::vector<std::string> SerializeString(std::string input, std::string delimiter) {
+    std::vector<std::string> serializedString;
+    while(input.find(delimiter != std::string.npos)) {
+        int delimiterIndex = input.find(delimiter);
+        serializedString.push_back(input.substr(0, delimiterIndex));
+        input = input.substr(delimiterIndex);
+    }
+    return serializedString;
+}
+
 Mesh::Mesh(std::string meshName) {
     std::ifstream meshFile;
     size_t bytesInVector3 = sizeof(Vector3); // Number of bytes in each Vector3

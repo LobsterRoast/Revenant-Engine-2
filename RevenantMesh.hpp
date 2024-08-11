@@ -1,9 +1,9 @@
 #ifndef RevenantMesh
 #define RevenantMesh
 #include <string>
+#include <vector>
 #include "RevenantTris.hpp"
 #include "RevenantVectors.hpp"
-
 
 class Mesh {
     public:

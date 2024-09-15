@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-Mesh Create_Mesh(const unsigned char meshName[]) {
+Mesh::Mesh(std::string meshName) {
     std::ifstream meshFile;
     size_t bytesInVector3 = sizeof(Vector3); // Number of bytes in each Vector3
     size_t Vector3BytesToMalloc = 0; // Number of bytes to be allocated to the vertices pointer

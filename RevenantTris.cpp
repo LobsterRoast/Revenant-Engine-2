@@ -1,14 +1,16 @@
-#include "RevenantTris.hpp"
-#include "RevenantVectors.hpp"
+#include "RevenantTris.h"
+#include "RevenantVectors.h"
 
-Tri::Tri(Vector3* a, Vector3* b, Vector3* c) {
-    this->a = a;
-    this->b = b;
-    this->c = c;
+Tri Create_Tri(Vector3* a, Vector3* b, Vector3* c) {
+    Tri returnTri;
+    returnTri.a = a;
+    returnTri.b = b;
+    returnTri.c = c;
+    return returnTri;
 }
 
-void Tri::SetNormal() {
-    normal = CrossProduct(*a, *b);
+void SetNormal(Tri* tri) {
+    tri->normal = CrossProduct(*tri->a, *tri->b);
 }
 
 float Deg2Rad(float thetaD) {

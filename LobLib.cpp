@@ -73,10 +73,11 @@ int LLCore::LLCoreLoop() {
     return 0;
 }
 
-int LLCore::LLCoreExit() {
+int LLCore::LLCoreExit() { 
     SDL_DestroyRenderer(sdlRenderer);
     SDL_DestroyWindow(sdlWindow);
     SDL_Quit();
+    
     return 0;
 }
 

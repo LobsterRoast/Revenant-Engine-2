@@ -1,5 +1,5 @@
-src/%.o
+src/*.o
 .vscode
 deprecated-src
 rev
-%.o
+*.o

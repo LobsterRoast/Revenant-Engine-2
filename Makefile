@@ -6,8 +6,8 @@ CFLAGS := -Wall  # Add any C-specific flags
 LDFLAGS := `pkg-config --cflags --libs sdl2` -lOpenCL  # Link SDL2 and OpenCL
 
 # Source files and object files
-SRCS_CPP := ConsoleInputs.cpp clIntegration.cpp GameObject.cpp SerializeString.cpp \
-            RevenantMesh.cpp main.cpp
+SRCS_CPP := ConsoleInputs.cpp clIntegration.cpp SerializeString.cpp \
+            RevenantMesh.cpp main.cpp LobLib.cpp
 SRCS_C := RevenantVectors.c RevenantTris.c
 OBJS := $(SRCS_CPP:.cpp=.o) $(SRCS_C:.c=.o)
 

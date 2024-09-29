@@ -3,6 +3,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <stdint.h>
 typedef struct {
     float x;
     float y;

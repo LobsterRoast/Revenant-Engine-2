@@ -21,7 +21,6 @@ struct Transform {
 };
 class GameObject {
     std::string name;
-    Mesh* objMesh;
     Vector3 transform;
     GameObject* children;
     bool isStatic;

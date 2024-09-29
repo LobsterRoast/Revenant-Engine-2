@@ -1,16 +1,13 @@
-#ifndef RevenantTris
-#define RevenantTris
+#ifndef REVENANT_TRIS_H
+#define REVENANT_TRIS_H
 #include "RevenantVectors.h"
 
 typedef struct {
-    Vector3* a;
-    Vector3* b;
-    Vector3* c;
+    unsigned short vertex[3];
     Vector3 normal;
 } Tri;
-Tri Create_Tri(Vector3* a, Vector3* b, Vector3* c);
-void SetNormal(Tri* tri);
-const float ThetaConversionConstant = 3.14159/180;
+Tri Create_Tri(unsigned short a, unsigned short b, unsigned short c);
+extern const float ThetaConversionConstant;
 float Deg2Rad(float thetaD);
 float Rad2Deg(float thetaR);
 

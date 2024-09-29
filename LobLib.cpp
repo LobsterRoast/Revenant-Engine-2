@@ -69,6 +69,10 @@ int LLCore::LLCoreLoop() {
     CL_Execution(framebuffer);
     SDL_RenderClear(sdlRenderer);
     SDL_RenderPresent(sdlRenderer);
+    for(int i = 0; i < w * h; i++) {
+        SDL_SetRenderDrawColor(sdlRenderer, framebuffer[i].r, framebuffer[i].g, framebuffer[i].b, framebuffer[i].a);
+        SDL_RenderDrawPoint(sdlRenderer, i%w, i/w);
+    }
     delete[] framebuffer;
     return 0;
 }

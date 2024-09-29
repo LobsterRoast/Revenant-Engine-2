@@ -1,14 +1,14 @@
 # Compiler and flags
 CXX := g++
 C := gcc
-CXXFLAGS := -Wall -std=c++17  # Add any flags you need
-CFLAGS := -Wall  # Add any C-specific flags
+CXXFLAGS := -Wall -std=c++17 -I./src/headers/cpp -I./src/headers/c # Add any flags you need
+CFLAGS := -Wall -I./src/headers/c# Add any C-specific flags
 LDFLAGS := `pkg-config --cflags --libs sdl2` -lOpenCL  # Link SDL2 and OpenCL
 
 # Source files and object files
-SRCS_CPP := ConsoleInputs.cpp clIntegration.cpp SerializeString.cpp \
-            RevenantMesh.cpp main.cpp LobLib.cpp
-SRCS_C := RevenantVectors.c RevenantTris.c
+SRCS_CPP := src/ConsoleInputs.cpp src/clIntegration.cpp src/SerializeString.cpp \
+            src/RevenantMesh.cpp src/main.cpp src/LobLib.cpp
+SRCS_C := src/RevenantVectors.c src/RevenantTris.c
 OBJS := $(SRCS_CPP:.cpp=.o) $(SRCS_C:.c=.o)
 
 # Executable name

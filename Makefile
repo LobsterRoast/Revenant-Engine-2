@@ -7,7 +7,7 @@ LDFLAGS := `pkg-config --cflags --libs sdl2` -lOpenCL  # Link SDL2 and OpenCL
 
 # Source files and object files
 SRCS_CPP := src/ConsoleInputs.cpp src/clIntegration.cpp src/SerializeString.cpp \
-            src/RevenantMesh.cpp src/main.cpp src/LobLib.cpp
+            src/RevenantMesh.cpp src/main.cpp src/LobLib.cpp src/clHeap.cpp
 SRCS_C := src/RevenantVectors.c src/RevenantTris.c
 OBJS := $(SRCS_CPP:.cpp=.o) $(SRCS_C:.c=.o)
 

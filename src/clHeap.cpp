@@ -24,6 +24,9 @@ CL_Heap::CL_Heap(CL_Object *clObject, VRAM_Presets size) {
     // Ensure blocks only has 1 block and create a block encompassing the whole thing
     blocks.resize(1);
     Create_CL_MemBlock(&blocks[0], 0, allocAmount-1, allocAmount, true);
+    if (blocks[0].size == 0) {
+        std::cerr << "Could not create initial CL_MemBlock.\n";
+    }
 }
 
 CL_Heap::CL_Heap(CL_Object *clObject, uint64_t size) {
@@ -32,4 +35,7 @@ CL_Heap::CL_Heap(CL_Object *clObject, uint64_t size) {
     // Ensure blocks only has 1 block and create a block encompassing the whole thing
     blocks.resize(1);
     Create_CL_MemBlock(&blocks[0],0, size-1, size, true);
+    if (blocks[0].size == 0) {
+        std::cerr << "Could not create initial CL_MemBlock.\n";
+    }
 }

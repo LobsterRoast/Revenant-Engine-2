@@ -33,11 +33,11 @@ class CL_Heap {
         CL_Heap(CL_Object *clObject, uint64_t size);
         template <typename T>
         CL_MemBlock GetHeapBlock(T var) {
+            CL_MemBlock memBlock;
             size_t memSize = sizeof(T);
             for(int i = 0; i < blocks.size(); i++) {
                 // Check to see if there is an available block of memory to store the specified var in
                 if (blocks[i].size >= memSize && blocks[i].free == true) {
-                    CL_MemBlock memBlock;
                     CL_MemBlock remainder;
                     // Creates a memBlock perfectly sized to hold your variable
                     Create_CL_MemBlock(
@@ -67,6 +67,14 @@ class CL_Heap {
                     return memBlock;
                 }
             }
+            Create_CL_MemBlock(
+                &memBlock,
+                0,
+                0,
+                0,
+                false
+            );
+            return memBlock;
         }
     private:
         cl_int err = 0;

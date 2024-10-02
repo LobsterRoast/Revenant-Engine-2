@@ -26,7 +26,7 @@ int clSetup(CL_Object* clObject) {
         }
         std::cout << std::flush;
         clObject->activePlatform = clObject->compatiblePlatforms[cinInteger("Please input the index of your desired OpenCL platform.\n",
-                                                        "Platform at the specified index does not exist. Please input a valid index.\n")];
+                                                                            "Platform at the specified index does not exist. Please input a valid index.\n")];
     }
     else {
         std::cerr << "No platforms compatible with OpenCL found. Please ensure you have a compatible OpenCL runtime installed." << std::flush;

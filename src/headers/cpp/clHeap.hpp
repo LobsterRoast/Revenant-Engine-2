@@ -23,7 +23,7 @@ typedef struct {
         bool free;
 } CL_MemBlock;
 
-void Create_CL_MemBlock(CL_MemBlock *memBlock, uint32_t start, uint32_t end, uint64_t size, bool free);
+void Create_CL_MemBlock(CL_MemBlock *memBlock, uint64_t start, uint64_t end, uint64_t size, bool free);
 
 class CL_Heap {
     public:

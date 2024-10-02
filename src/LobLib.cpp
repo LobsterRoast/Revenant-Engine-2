@@ -58,7 +58,7 @@ int LLCore::LLCoreStart() {
     quit = false;
     InitializeSDL();
     InitializeOpenCL();
-    CL_Heap myHeap = CL_Heap(&clObject, CL_MaxAlloc);
+    CL_Heap myHeap = CL_Heap(&clObject, CL_8Gb);
     myHeap.GetHeapBlock<int>(test);
     return 0;
 }

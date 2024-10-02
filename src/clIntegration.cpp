@@ -64,7 +64,7 @@ int clSetup(CL_Object* clObject) {
     std::cout << "Device vendor: " + clObject->vendor << std::endl;
     clObject->version = clObject->activeDevice.getInfo<CL_DEVICE_VERSION>();
     std::cout << "Device version: " + clObject->version << std::endl;
-    clObject->kernelFile = std::ifstream("kernels.cl");
+    clObject->kernelFile = std::ifstream("src/kernels.cl");
     if (clObject->kernelFile.is_open()) std::cout << "Kernel file successfully opened." << std::endl;
     else {
         std::cout << "Couldn't open kernels.cl. Terminating the program." << std::endl;

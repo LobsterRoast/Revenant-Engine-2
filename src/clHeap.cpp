@@ -1,16 +1,35 @@
 #include "clHeap.hpp"
+#include <iostream>
 
-CL_MemBlock::CL_MemBlock(uint32_t start, uint32_t end, uint32_t size, bool free)
-: start(start), end(end), size(size), free(free) {}
-
-CL_Heap::CL_Heap(CL_Object clObject, VRAM_Presets size) {
-    heap = cl::Buffer(clObject.context, CL_MEM_READ_WRITE, size);
-    blocks.resize(1);
-    blocks[0] = CL_MemBlock(0, size-1, size, true);
+void Create_CL_MemBlock(CL_MemBlock *memBlock, uint32_t start, uint32_t end, uint64_t size, bool free) {
+    memBlock->start = start;
+    memBlock->end = end;
+    memBlock->size = size;
+    memBlock->free = free;
 }
 
-CL_Heap::CL_Heap(CL_Object clObject, uint32_t size) {
-    heap = cl::Buffer(clObject.context, CL_MEM_READ_WRITE, size);
+CL_Heap::CL_Heap(CL_Object *clObject, VRAM_Presets size) {
+    size_t allocAmount;
+    size_t maxMalloc;
+    // Check the maximum alloc size for your device
+    clGetDeviceInfo(clObject->activeDevice.get(), CL_DEVICE_MAX_MEM_ALLOC_SIZE, sizeof(size_t), &maxMalloc, NULL);
+    if (size > maxMalloc) {
+        std::cerr << "Error: Invalid OpenCL buffer size!\n" << "Desired buffer size: " << size << "\nMax buffer size: " << maxMalloc << '\n';
+        exit(282);
+    }
+    // If CL_MaxAlloc is the specified alloc size, allocate the maximum amount of memory supported by your device
+    allocAmount = (size == CL_MaxAlloc) ? maxMalloc : size;
+    this->clObject = clObject;
+    heap = cl::Buffer(clObject->context, CL_MEM_READ_WRITE, allocAmount);
+    // Ensure blocks only has 1 block and create a block encompassing the whole thing
     blocks.resize(1);
-    blocks[0] = CL_MemBlock(0, size-1, size, true);
+    Create_CL_MemBlock(&blocks[0], 0, allocAmount-1, allocAmount, true);
+}
+
+CL_Heap::CL_Heap(CL_Object *clObject, uint64_t size) {
+    this->clObject = clObject;
+    heap = cl::Buffer(clObject->context, CL_MEM_READ_WRITE, size);
+    // Ensure blocks only has 1 block and create a block encompassing the whole thing
+    blocks.resize(1);
+    Create_CL_MemBlock(&blocks[0],0, size-1, size, true);
 }

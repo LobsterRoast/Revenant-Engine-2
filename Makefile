@@ -34,4 +34,6 @@ clean:
 	rm -f $(OBJS) $(TARGET)
 
 # Rebuild rule
-rebuild: clean all
+rebuild:
+	$(MAKE) clean
+	$(MAKE) all

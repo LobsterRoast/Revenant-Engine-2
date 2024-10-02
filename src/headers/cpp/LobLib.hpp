@@ -7,6 +7,7 @@
 #include "RevenantMesh.hpp"
 #include "clIntegration.hpp"
 #include "framebuffer.h"
+#include "clHeap.hpp"
 #include <SDL2/SDL.h>
 
 #define to_half fp16_ieee_from_fp32_value

@@ -83,13 +83,20 @@ class CL_Heap {
         cl_int err = 0;
         template <typename T>
         int AllocToHeap(CL_Object *clObject, CL_MemBlock memBlock, T var) {
-            unsigned short index = (unsigned short)std::floor(memBlock.start/maxMalloc);
+            unsigned short startIndex = (unsigned short)std::floor(memBlock.start/maxMalloc);
+            unsigned short endIndex = (unsigned short)std::floor(memBlock.end/maxMalloc);
+            // Check to see if the start and end of the MemBlock span different parts of the heap
+            if (startIndex == endIndex) {
             // Write var into the part of the heap specified by its CL_MemBlock
-            err = queue.enqueueWriteBuffer(heap[index], CL_TRUE, memBlock.start, memBlock.size, &var);
-            if(err != 0) {
-                std::cerr << "Something went wrong." << '\n' << "Error Code: " << err + '\n';
+                err = queue.enqueueWriteBuffer(heap[index], CL_TRUE, memBlock.start, memBlock.size, &var);
+                if(err != 0) {
+                    std::cerr << "Something went wrong." << '\n' << "Error Code: " << err + '\n';
+                }
+                return 0;
+            } else {
+                size_t indexASize = maxMalloc - memBlock.start;
+                size_t indexBSize = memBlock.size - indexASize;
             }
-            return 0;
         }
 };
 

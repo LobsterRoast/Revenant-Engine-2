@@ -6,12 +6,11 @@
 #include "ConsoleInputs.hpp"
 
 int clSetup(CL_Object* clObject) {
-
+    std::string platformName;
     // Set the active platform
     cl::Platform::get(&clObject->compatiblePlatforms); // Populate clObject->compatiblePlatforms with all the installed platforms on the user's device
     int platformCount = clObject->compatiblePlatforms.size();
     if (platformCount == 1) { // If only 1 platform is found, make it the active platform
-        std::string platformName;
         clObject->activePlatform = clObject->compatiblePlatforms.front();
         clObject->activePlatform.getInfo(CL_PLATFORM_NAME, &platformName);
         std::cout << "Platform found!\nPlatform name: " + platformName + "\nActive platform: " + platformName << std::endl;
@@ -19,14 +18,14 @@ int clSetup(CL_Object* clObject) {
     else if (platformCount > 1) { // If multiple platforms are found, have the user input which one they would like to use
         std::cout << "Multiple platforms found! Please specify a platform to use.\n" << std::endl;
         for(int i = 0; i < platformCount; i++) {
-            std::string platformName;
             clObject->compatiblePlatforms[i].getInfo(CL_PLATFORM_NAME, &platformName);
             std::cout << std::to_string(i) + " - " + platformName + '\n';
-            std::cout << "Active platform: " + platformName << std::endl;
         }
         std::cout << std::flush;
         clObject->activePlatform = clObject->compatiblePlatforms[cinInteger("Please input the index of your desired OpenCL platform.\n",
                                                                             "Platform at the specified index does not exist. Please input a valid index.\n")];
+        clObject->activePlatform.getInfo(CL_PLATFORM_NAME, &platformName);
+        std::cout << "Active platform: " + platformName << std::endl;
     }
     else {
         std::cerr << "No platforms compatible with OpenCL found. Please ensure you have a compatible OpenCL runtime installed." << std::flush;

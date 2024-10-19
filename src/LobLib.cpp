@@ -54,12 +54,13 @@ int LLCore::CL_Execution(Pixel *framebuffer) {
 }
 
 int LLCore::LLCoreStart() {
-    int test = 5;
+    int test = 1;
     quit = false;
     InitializeSDL();
     InitializeOpenCL();
     CL_Heap myHeap = CL_Heap(&clObject, CL_8Gb);
     myHeap.GetHeapBlock<int>(test);
+    myHeap.TestCL();
     return 0;
 }
 

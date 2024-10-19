@@ -1,16 +1,26 @@
 typedef struct {
-    public:
-        uint64_t start;
-        uint64_t end;
-        uint64_t size;
-        uint16 bufferIndex; 
-        bool free;
+    uint64_t start;
+    uint64_t end;
+    uint64_t size;
+    uint16 bufferIndex; 
+    bool free;
 } CL_MemBlock;
 
-__kernel void Test(__global char* data) {
-    char string[] = "Hello from the GPU!";
-    for (int i = 0; i < sizeof(string)/sizeof(char); i++) {
-        data[i] = string[i];
-    }
+typedef struct {
+    CL_MemBlock mainBlock;
+    CL_MemBlock vertexBlock;
+    CL_MemBlock indexBlock;
+    CL_MeshRef meshRef;
+} CL_MeshRef;
+
+char ReadBuffer(__global const char *heap, __global const CL_MemBlock memBlock, uint64_t index) {
+    return heap[memBlock.index][memBlock.start + index];
 }
 
+__kernel void GetMeshData(__global char *heap, __global CL_MeshRef mesh, __global char *output) {
+
+}
+
+__kernel void Test(__global char *heap, __global CL_MemBlock memBlock, __global char *output) {
+    *output = ReadBuffer(heap, memBlock, 0);
+}

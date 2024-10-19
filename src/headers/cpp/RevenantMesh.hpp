@@ -4,6 +4,7 @@
 #include <vector>
 #include "RevenantTris.h"
 #include "RevenantVectors.h"
+#include "clHeap.hpp"
 
 typedef struct {
     Vector3 vertices[1024];

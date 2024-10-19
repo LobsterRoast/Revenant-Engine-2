@@ -3,3 +3,4 @@ src/*.o
 deprecated-src
 rev
 *.o
+.git-credentials
